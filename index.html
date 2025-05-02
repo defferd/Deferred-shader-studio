@@ -336,10 +336,25 @@
     </div>
 
     <script>
-        // Add this at the start of your script
-console.log("Three.js version:", THREE.REVISION);
-if (!THREE.WebGLRenderer) {
-    alert("WebGL not supported or Three.js failed to load!");
+        // Add this FIRST in your script
+try {
+    console.log("Three.js loading check...");
+    
+    if (typeof THREE === 'undefined') {
+        throw new Error("Three.js not loaded!");
+    }
+    
+    console.log("Three.js version:", THREE.REVISION);
+    console.log("WebGLRenderer exists:", !!THREE.WebGLRenderer);
+    
+    if (!THREE.WebGLRenderer) {
+        alert("WebGL support missing!");
+    }
+} catch (error) {
+    console.error("Three.js initialization failed:", error);
+    alert("CRITICAL ERROR: " + error.message);
+    document.body.innerHTML = `<h1 style="color:red">${error.message}</h1>`;
+    throw error; // Stop execution
 }
         // Main Application Class
         class DeferredShaderStudio {
