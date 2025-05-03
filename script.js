@@ -1,4 +1,22 @@
-// Main variables
+// Main variablesfunction initWebGL() {
+    // ... existing code ...
+    
+    // Add this temporary clear color to test rendering
+    gl.clearColor(0.2, 0.4, 0.8, 1.0); // Blue color
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    
+    // If you see blue, WebGL is working
+}
+async function loadTextures() {
+    try {
+        // ... existing texture loading code ...
+        console.log('Textures loaded successfully');
+    } catch (error) {
+        console.error('Texture loading failed:', error);
+        document.querySelector('.preview-container').innerHTML = 
+            '<div class="error">Failed to load textures</div>';
+    }
+}
 let canvas, gl;
 let shaderProgram;
 let sceneObjects = [];
