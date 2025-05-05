@@ -1,0 +1,493 @@
+/* Base Styles */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --dark-bg: #1e1e1e;
+    --darker-bg: #121212;
+    --panel-bg: #252525;
+    --border-color: #444;
+    --text-color: #eee;
+    --text-muted: #aaa;
+    --highlight-color: #4fc3f7;
+    --danger-color: #e74c3c;
+    --success-color: #2ecc71;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--darker-bg);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* App Layout */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.menu-bar {
+    background-color: var(--dark-bg);
+    padding: 5px 10px;
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    z-index: 10;
+}
+
+.menu-section {
+    position: relative;
+    margin-right: 15px;
+}
+
+.menu-title {
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.menu-title:hover {
+    background-color: #333;
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 5px 0;
+    min-width: 150px;
+    display: none;
+    z-index: 100;
+}
+
+.menu-section:hover .menu-dropdown {
+    display: block;
+}
+
+.menu-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.menu-dropdown button:hover {
+    background-color: #333;
+}
+
+.main-app-area {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.toolbar {
+    width: 200px;
+    background-color: var(--panel-bg);
+    padding: 10px;
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+}
+
+.tool-section {
+    margin-bottom: 20px;
+}
+
+.tool-section h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--highlight-color);
+    display: flex;
+    align-items: center;
+}
+
+.tool-section h3 i {
+    margin-right: 8px;
+}
+
+.tool-btn {
+    width: 36px;
+    height: 36px;
+    margin: 2px;
+    border: none;
+    background-color: #333;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tool-btn:hover {
+    background-color: #444;
+}
+
+.tool-btn.active {
+    background-color: var(--primary-color);
+}
+
+.tool-option {
+    margin-bottom: 10px;
+}
+
+.tool-option label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.tool-option input[type="range"] {
+    width: 100%;
+}
+
+.tool-option span {
+    display: inline-block;
+    font-size: 11px;
+    margin-top: 3px;
+    color: var(--text-muted);
+}
+
+.color-pickers {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.color-picker {
+    flex: 1;
+}
+
+.color-picker label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.color-picker input[type="color"] {
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+}
+
+#swap-colors {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.canvas-area {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    background-color: #333;
+}
+
+.canvas-container {
+    position: relative;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#main-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+}
+
+#grid-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-color: transparent;
+}
+
+.zoom-controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.zoom-controls button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.zoom-controls span {
+    margin: 0 5px;
+    font-size: 12px;
+}
+
+.right-panels {
+    width: 250px;
+    background-color: var(--panel-bg);
+    border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.panel {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.panel-header {
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.panel-header h3 {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.panel-header h3 i {
+    margin-right: 8px;
+}
+
+.panel-actions {
+    display: flex;
+}
+
+.panel-actions button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.panel-actions button:hover {
+    color: var(--text-color);
+}
+
+.panel-content {
+    padding: 10px;
+    overflow-y: auto;
+}
+
+#layers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.layer-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: #333;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.layer-item:hover {
+    background-color: #444;
+}
+
+.layer-item.active {
+    background-color: var(--primary-color);
+}
+
+.layer-item input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.layer-item .layer-name {
+    flex: 1;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.layer-item .layer-controls {
+    display: flex;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.layer-item:hover .layer-controls {
+    opacity: 1;
+}
+
+.layer-item .layer-controls button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 10px;
+    padding: 0 3px;
+}
+
+.layer-item .layer-controls button:hover {
+    color: var(--text-color);
+}
+
+.channel-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.channel-btn {
+    display: flex;
+    align-items: center;
+    padding: 5px 8px;
+    background-color: #333;
+    border: none;
+    color: var(--text-color);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.channel-btn i {
+    margin-right: 8px;
+}
+
+.channel-btn:hover {
+    background-color: #444;
+}
+
+.channel-btn.active {
+    background-color: var(--primary-color);
+}
+
+.channel-property {
+    margin-bottom: 10px;
+}
+
+.channel-property label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.channel-property input[type="range"] {
+    width: 100%;
+}
+
+.channel-property span {
+    display: inline-block;
+    font-size: 11px;
+    margin-top: 3px;
+    color: var(--text-muted);
+}
+
+#preview-container {
+    width: 100%;
+    height: 200px;
+    background-color: #333;
+    margin-bottom: 10px;
+}
+
+.preview-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.preview-controls select {
+    flex: 1;
+    min-width: 100%;
+    background-color: #333;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.preview-controls button {
+    flex: 1;
+    background-color: #333;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(50% - 3px);
+}
+
+.preview-controls button i {
+    margin-right: 5px;
+}
+
+.preview-controls button:hover {
+    background-color: #444;
+}
+
+.status-bar {
+    background-color: var(--dark-bg);
+    padding: 3px 10px;
+    display: flex;
+    border-top: 1px solid var(--border-color);
+    font-size: 12px;
+}
+
+.status-item {
+    margin-right: 15px;
+    color: var(--text-muted);
+}
+
+/* Context Menu */
+.context-menu {
+    position: absolute;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 5px 0;
+    min-width: 150px;
+    z-index: 1000;
+    display: none;
+}
+
+.context-menu-item {
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.context-menu-item:hover {
+    background-color: #333;
+}
+
+.context-menu-separator {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 5px 0;
+}
